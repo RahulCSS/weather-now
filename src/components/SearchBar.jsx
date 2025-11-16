@@ -1,8 +1,11 @@
 import React from 'react'
 
-const SearchBar = () => {
+const SearchBar = ({placeHolder,icon,alt}) => {
   return (
-    <div>SearchBar</div>
+    <div>
+      <img src={icon} alt={alt} />
+      <input type="text" placeholder={placeHolder} />
+    </div>
   )
 }
 

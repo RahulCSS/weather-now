@@ -1,0 +1,8 @@
+.button-container {
+  background-color: hsl(243, 27%, 20%);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  text-align: center;
+}
