@@ -23,5 +23,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color: white;
+    color: hsl(0, 0%, 100%);
+    font-family: 'DM Sans', sans-serif;
 }

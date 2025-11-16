@@ -2,7 +2,6 @@ import React from "react";
 import "./App.css";
 import Selector from "./components/Selector.jsx";
 import SearchBar from "./components/SearchBar.jsx";
-import Button from "./components/Button.jsx";
 import CurrentWeather from "./components/CurrentWeather.jsx";
 import DetailedWeather from "./components/DetailedWeather.jsx";
 import DailyForecast from "./components/DailyForecast.jsx";
@@ -36,7 +35,7 @@ const App = () => {
             icon={searchIcon}
             alt="Search Icon"
           />
-          <Button title="Search" />
+          <button id="search-button" type="button">Search</button>
         </div>
       </div>
 
