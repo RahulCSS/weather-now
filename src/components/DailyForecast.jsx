@@ -6,6 +6,7 @@ import { formatToDayAndDate } from '../services/formatDay&Date.js';
 const DailyForecast = ({ weatherData }) => {
   const emptyDays = Array(7).fill(null);
 
+  // Show loading state if weatherData is not available
   if (!weatherData ) {
       return <div className="loading-daily-forecast">
         {emptyDays.map((card, index) => (
@@ -24,8 +25,8 @@ const DailyForecast = ({ weatherData }) => {
   const days = daily.time.map((t, i) => ({
     time: t,
     weather_code: daily.weather_code[i],
-    temperature_2m_max: daily.temperature_2m_max[i],
-    temperature_2m_min: daily.temperature_2m_min[i],
+    temperature_2m_max: Math.round(daily.temperature_2m_max[i]),
+    temperature_2m_min: Math.round(daily.temperature_2m_min[i]),
   }));
 
   return (

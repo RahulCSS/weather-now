@@ -16,21 +16,34 @@ const App = () => {
   const [suggestions, setSuggestions] = useState([]);
   const [selectedCity, setSelectedCity] = useState(null);
   const [weatherData, setWeatherData] = useState(null);
+  const [unit, setUnit] = useState("Metric");
+  const [selectedDay, setSelectedDay] = useState(null);
+
+  const daysOptions = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
 
   const fetchCities = async (query) => {
     if (!query || query.length < 2) {
       setSuggestions([]);
       return;
     }
-    
     try {
       const res = await fetch(
-        `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=5&language=en`
+        `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(
+          query
+        )}&count=5&language=en`
       );
       const data = await res.json();
       setSuggestions(data.results || []);
     } catch (error) {
-      console.error('Error fetching cities:', error);
+      console.error("Error fetching cities:", error);
       setSuggestions([]);
     }
   };
@@ -41,36 +54,46 @@ const App = () => {
   );
 
   // Handle city selection from dropdown
-  const handleCitySelect = async (city) => {
+  const handleCitySelect = async (city, unit) => {
     setSelectedCity(city);
-    console.log('Selected city:', city);
-    
+    const isMetric = unit === "Metric";
+
     // Fetch weather data for selected city
     try {
       const res = await fetch(
-        `https://api.open-meteo.com/v1/forecast?latitude=${city.latitude}&longitude=${city.longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,windspeed_10m&hourly=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto`
+        `https://api.open-meteo.com/v1/forecast?latitude=${
+          city.latitude
+        }&longitude=${
+          city.longitude
+        }&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,windspeed_10m&hourly=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min&temperature_unit=${
+          isMetric ? "celsius" : "fahrenheit"
+        }&wind_speed_unit=${isMetric ? "kmh" : "mph"}&precipitation_unit=${
+          isMetric ? "mm" : "inch"
+        }&timezone=auto`
       );
+
       const data = await res.json();
       setWeatherData(data);
-      console.log('Weather data:', data);
+      console.log("Weather data:", data);
     } catch (error) {
-      console.error('Error fetching weather:', error);
+      console.error("Error fetching weather:", error);
     }
-    
+
     setSuggestions([]);
   };
 
   // Handle search button click
   const handleSearch = () => {
     if (selectedCity) {
-      console.log('Searching weather for:', selectedCity);
-
+      console.log("Searching weather for:", selectedCity);
     }
   };
 
-  useEffect(() => {
-    console.log("Updated suggestions:", suggestions);
-  }, [suggestions]);
+  const handleUnitChange = (selectedUnit) => {
+    if( !weatherData) return;
+    setUnit(selectedUnit);
+    handleCitySelect(selectedCity, selectedUnit);
+  };
 
   return (
     <div className="container">
@@ -83,6 +106,8 @@ const App = () => {
           leftAlt="Units Icon"
           rightIcon={dropdownIcon}
           rightAlt="Dropdown Icon"
+          unit={unit}
+          onSelect={(selectedUnit) => handleUnitChange(selectedUnit)}
         />
       </div>
 
@@ -98,11 +123,7 @@ const App = () => {
             suggestions={suggestions}
             onSelect={handleCitySelect}
           />
-          <button 
-            id="search-button" 
-            type="button"
-            onClick={handleSearch}
-          >
+          <button id="search-button" type="button" onClick={handleSearch}>
             Search
           </button>
         </div>
@@ -114,19 +135,14 @@ const App = () => {
         <div className="left-column-section">
           <CurrentWeather weatherData={weatherData} city={selectedCity} />
           <DetailedWeather weatherData={weatherData} />
-          <DailyForecast weatherData={weatherData} />
+          <div>
+            <h3>Daily Forecast</h3>
+            <DailyForecast weatherData={weatherData} />
+          </div>
         </div>
 
         {/* Right column section */}
         <div className="right-column-section">
-          <div className="hourly-forecast-header">
-            <h2>Hourly forecast</h2>
-            <Selector
-              title="Day"
-              rightIcon={dropdownIcon}
-              rightAlt="Dropdown Icon"
-            />
-          </div>
           <HourlyForecast weatherData={weatherData} />
         </div>
       </div>

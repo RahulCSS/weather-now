@@ -21,7 +21,7 @@
 
 .searchbar-input {
   width: 100%;
-  background: #1e293b;
+  background: hsl(243, 27%, 20%);
   border: 2px solid transparent;
   color: white;
   padding: 0.875rem 1rem 0.875rem 3rem;
@@ -30,27 +30,23 @@
   transition: all 0.2s ease;
 }
 
+.searchbar-input:focus {
+  outline: 2px solid #e8f1ff;
+}
+
+
 .searchbar-input::placeholder {
   color: #94a3b8;
 }
 
-.searchbar-input:focus {
-  outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-
-/* Dropdown Suggestions */
 .suggestions-dropdown {
   position: absolute;
   top: calc(100% + 0.5rem);
   left: 0;
   right: 0;
-  background: #1e293b;
-  border: 1px solid #334155;
+  background: hsl(243, 27%, 20%);
   border-radius: 0.75rem;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-  max-height: 300px;
   overflow-y: auto;
   z-index: 1000;
   animation: dropdownSlideIn 0.2s ease;
@@ -67,31 +63,29 @@
   }
 }
 
-/* Custom Scrollbar */
+
 .suggestions-dropdown::-webkit-scrollbar {
   width: 8px;
 }
 
 .suggestions-dropdown::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: hsl(243, 27%, 30%);
   border-radius: 0 0.75rem 0.75rem 0;
 }
 
 .suggestions-dropdown::-webkit-scrollbar-thumb {
-  background: #475569;
+  background: hsl(243, 27%, 30%);
   border-radius: 4px;
 }
 
 .suggestions-dropdown::-webkit-scrollbar-thumb:hover {
-  background: #64748b;
+  background: hsl(243, 27%, 30%);
 }
 
-/* Suggestion Item */
+
 .suggestion-item {
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   cursor: pointer;
-  transition: all 0.15s ease;
-  border-bottom: 1px solid #334155;
 }
 
 .suggestion-item:last-child {
@@ -100,19 +94,17 @@
 
 .suggestion-item:hover,
 .suggestion-item.selected {
-  background: #334155;
+  background: hsl(243, 27%, 30%);
 }
 
 .suggestion-item:active {
-  background: #475569;
+  background: hsl(243, 27%, 30%);
 }
 
-/* Suggestion Content */
+
 .suggestion-main {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.25rem;
 }
 
 .no-results {

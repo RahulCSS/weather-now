@@ -1,9 +1,101 @@
+/* Container for the selector */
 .selector-container {
+  position: relative;
+  width: 200px;
+  font-family: sans-serif;
+}
+
+.selector-container:focus {
+  border: 2px solid #e8f1ff;
+}
+
+/* Header */
+.selector-header {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: space-between;
   background-color: hsl(243, 27%, 20%);
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
   cursor: pointer;
+}
+
+.selector-left-icon,
+.selector-right-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+/* Dropdown list */
+.selector-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: hsl(243, 23%, 24%);
+  border-radius: .5rem;
+  margin-top: 4px;
+  padding: 8px;
+  z-index: 10;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  list-style: none;
+}
+
+.option-label{
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0.5rem 0.25rem;
+  border-radius: .25rem;
+  margin-bottom: .25rem;
+}
+
+.option-label:hover {
+  background-color: hsl(243, 27%, 30%);
+}
+
+/* Sub-options container */
+.sub-options {
+  list-style: none;
+  font-size: 0.7rem;
+  color: hsl(250, 6%, 84%);
+  margin-top: .5rem;
+}
+
+/* Each category */
+.sub-category {
+  margin-bottom: 6px;
+}
+
+/* Units under category */
+.sub-category ul {
+  list-style: none;
+}
+
+.unit-item {
+  background-color: hsl(243, 23%, 24%);
+  border-radius: .25rem;
+  font-size: 0.75rem;
+  padding: 0.5rem 0.25rem;
+  margin: 0.2rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.unit-selected {
+  background: hsl(243, 23%, 30%);  
+}
+
+.option-separator {
+  border: none;
+  border-top: 1px solid hsl(0, 0%, 80%);
+  margin: 6px 0 0 0;
+}
+
+.sub-category-title {
+  font-size: 0.25rem;  
+  font-weight: 200;    
+  color: hsl(250, 6%, 84%);  
 }

@@ -8,5 +8,11 @@ export function formatToDayAndDate(isoString) {
     year: "numeric"
   });
 
-  return { day, date };
+  const time = d.toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true
+  });
+
+  return { day, date, time };
 }

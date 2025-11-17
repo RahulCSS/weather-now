@@ -11,6 +11,7 @@ import "./DailyInfoCard.css";
 
 const DailyInfoCard = ({label,icon,maxTemp,minTemp}) => {
 
+  // Mapping weather codes to icons
   const Icons =  {
         0: sunnyIcon,          
         1: sunnyIcon,          
@@ -26,13 +27,13 @@ const DailyInfoCard = ({label,icon,maxTemp,minTemp}) => {
   return (
     <div className="dailyinfo-card">
       <p className="dailyinfo-day">{dayLabel}</p>
-      {icon !==null && icon !== undefined && (
-        <img 
-          className="dailyinfo-icon" 
-          src={weatherIcon} 
-          alt="weather-icon" 
-        />
-      )}
+      {icon || icon === 0 ? (
+          <img 
+            className="dailyinfo-icon" 
+            src={weatherIcon} 
+            alt="weather-icon" 
+          />
+        ) : null}
       <div className="dailyinfo-temp-values">
         <p>{maxTemp}</p>
         <p>{minTemp}</p>

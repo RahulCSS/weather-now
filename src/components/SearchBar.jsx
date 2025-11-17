@@ -18,6 +18,7 @@ const SearchBar = ({ placeHolder, icon, alt, onTyping, suggestions = [], onSelec
     }
   };
 
+  // Handle selection of a city
   const handleSelect = (city) => {
     const cityName = `${city.name}, ${city.country}`;
     setValue(cityName);
@@ -28,6 +29,7 @@ const SearchBar = ({ placeHolder, icon, alt, onTyping, suggestions = [], onSelec
     }
   };
 
+  // Handle keyboard navigation
   const handleKeyDown = (e) => {
     if (!showDropdown || !suggestions || suggestions.length === 0) return;
 
@@ -135,7 +137,6 @@ const SearchBar = ({ placeHolder, icon, alt, onTyping, suggestions = [], onSelec
         </div>
       )}
 
-      
       {showDropdown && value && suggestions && suggestions.length === 0 && (
         <div className="suggestions-dropdown">
           <div className="no-results">

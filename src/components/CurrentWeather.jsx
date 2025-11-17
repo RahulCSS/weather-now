@@ -13,7 +13,7 @@ import { formatToDayAndDate } from '../services/formatDay&Date.js';
 
 const CurrentWeather = ({weatherData, city}) => {
 
-  
+  // Show loading state if weatherData or city is not available
   if (!weatherData || !city) {
     return <div className="loading-current-weather">
       <img src={loadingIcon} alt="Loading Weather" />
@@ -21,6 +21,7 @@ const CurrentWeather = ({weatherData, city}) => {
     </div>;
   }
   
+  // Mapping weather codes to icons
   const Icons =  {
       0: sunnyIcon,          
       1: sunnyIcon,          
@@ -31,16 +32,13 @@ const CurrentWeather = ({weatherData, city}) => {
       51: drizzleIcon,
   }
   const weatherIcon =Icons[weatherData?.current?.weather_code] || sunnyIcon;
-
-  console.log('CurrentWeather props:', {weatherData, city});
   const timeString = weatherData?.current?.time;
   const { day, date } = formatToDayAndDate(timeString);
-  console.log(date, day);
 
   return (
     <div className="current-weather-card">
       <div className="city-date">
-        <h2>{city.name}</h2>
+        <h2>{`${city.name}, ${city.country}`}</h2>
         <p>{day}, {date}</p>
       </div>
       <div className="weatherIcon-temp">

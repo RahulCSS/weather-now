@@ -4,6 +4,7 @@ import "./DetailedWeather.css";
 const DetailedWeather = ({ weatherData }) => {
   const emptyCards = ["Feels Like","Humidity", "Wind","Precipitation"];
 
+  // Show loading state if weatherData is not available
   if (!weatherData ) {
       return <div className="loading-detailed-weather">
         {emptyCards.map((card, index) => (

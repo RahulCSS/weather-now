@@ -20,16 +20,19 @@
   background-position: center;
   background-repeat: no-repeat;
   display: flex;
-  justify-content: center; 
+  justify-content: space-between; 
   align-items: center;                
   text-align: center;
-  padding: 1rem;
+  padding: 1rem 2rem;
   height: 250px;
   border-radius: 1rem;
 }
 
 .city-date{
-
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
 }
 
 .weatherIcon-temp{
