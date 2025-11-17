@@ -1,0 +1,49 @@
+.loading-current-weather{
+  background-color: hsl(243, 27%, 20%);
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;   
+  justify-content: center;
+  height: 250px;
+  gap:0.5rem
+}
+
+.loading-current-weather img {
+  width: 2rem;   
+  height: 2rem; 
+}
+
+.current-weather-card {
+  background-image: url(../assets/images/bg-today-large.svg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center; 
+  align-items: center;                
+  text-align: center;
+  padding: 1rem;
+  height: 250px;
+  border-radius: 1rem;
+}
+
+.city-date{
+
+}
+
+.weatherIcon-temp{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.weatherIcon-temp img{
+  width: 5rem;
+  height: 5rem;
+}
+
+.weatherIcon-temp h1{
+  font-size: 3rem;
+  
+}

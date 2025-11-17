@@ -1,0 +1,6 @@
+.detailed-cards-container, .loading-detailed-weather{
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+

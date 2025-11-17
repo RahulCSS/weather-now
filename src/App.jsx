@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import "./App.css";
 import Selector from "./components/Selector.jsx";
 import SearchBar from "./components/SearchBar.jsx";
@@ -10,8 +10,68 @@ import logoIcon from "./assets/images/logo.svg";
 import unitsIcon from "./assets/images/icon-units.svg";
 import dropdownIcon from "./assets/images/icon-dropdown.svg";
 import searchIcon from "./assets/images/icon-search.svg";
+import { debounce } from "./services/debounce.js";
 
 const App = () => {
+  const [suggestions, setSuggestions] = useState([]);
+  const [selectedCity, setSelectedCity] = useState(null);
+  const [weatherData, setWeatherData] = useState(null);
+
+  const fetchCities = async (query) => {
+    if (!query || query.length < 2) {
+      setSuggestions([]);
+      return;
+    }
+    
+    try {
+      const res = await fetch(
+        `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=5&language=en`
+      );
+      const data = await res.json();
+      setSuggestions(data.results || []);
+    } catch (error) {
+      console.error('Error fetching cities:', error);
+      setSuggestions([]);
+    }
+  };
+
+  const debounceFetch = useCallback(
+    debounce((value) => fetchCities(value), 500),
+    []
+  );
+
+  // Handle city selection from dropdown
+  const handleCitySelect = async (city) => {
+    setSelectedCity(city);
+    console.log('Selected city:', city);
+    
+    // Fetch weather data for selected city
+    try {
+      const res = await fetch(
+        `https://api.open-meteo.com/v1/forecast?latitude=${city.latitude}&longitude=${city.longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,windspeed_10m&hourly=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto`
+      );
+      const data = await res.json();
+      setWeatherData(data);
+      console.log('Weather data:', data);
+    } catch (error) {
+      console.error('Error fetching weather:', error);
+    }
+    
+    setSuggestions([]);
+  };
+
+  // Handle search button click
+  const handleSearch = () => {
+    if (selectedCity) {
+      console.log('Searching weather for:', selectedCity);
+
+    }
+  };
+
+  useEffect(() => {
+    console.log("Updated suggestions:", suggestions);
+  }, [suggestions]);
+
   return (
     <div className="container">
       {/* 1. Header section */}
@@ -34,8 +94,17 @@ const App = () => {
             placeHolder="Search for a place..."
             icon={searchIcon}
             alt="Search Icon"
+            onTyping={debounceFetch}
+            suggestions={suggestions}
+            onSelect={handleCitySelect}
           />
-          <button id="search-button" type="button">Search</button>
+          <button 
+            id="search-button" 
+            type="button"
+            onClick={handleSearch}
+          >
+            Search
+          </button>
         </div>
       </div>
 
@@ -43,14 +112,14 @@ const App = () => {
       <div className="weather-Data-section">
         {/* Left column section */}
         <div className="left-column-section">
-          <CurrentWeather />
-          <DetailedWeather />
-          <DailyForecast />
+          <CurrentWeather weatherData={weatherData} city={selectedCity} />
+          <DetailedWeather weatherData={weatherData} />
+          <DailyForecast weatherData={weatherData} />
         </div>
 
         {/* Right column section */}
         <div className="right-column-section">
-          <div>
+          <div className="hourly-forecast-header">
             <h2>Hourly forecast</h2>
             <Selector
               title="Day"
@@ -58,7 +127,7 @@ const App = () => {
               rightAlt="Dropdown Icon"
             />
           </div>
-          <HourlyForecast />
+          <HourlyForecast weatherData={weatherData} />
         </div>
       </div>
     </div>

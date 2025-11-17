@@ -1,15 +1,11 @@
-.searchbar-container {
+.searchbar-wrapper {
   position: relative;
   width: 100%;
 }
 
-.seachbar-input {
+.searchbar-container {
+  position: relative;
   width: 100%;
-  background: #1e293b;
-  border: none;
-  padding: 0.875rem 1rem 0.875rem 3rem;
-  border-radius: 0.5rem;
-  font-size: 1rem;
 }
 
 .searchbar-icon {
@@ -17,4 +13,126 @@
   left: 1rem;
   top: 50%;
   transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.searchbar-input {
+  width: 100%;
+  background: #1e293b;
+  border: 2px solid transparent;
+  color: white;
+  padding: 0.875rem 1rem 0.875rem 3rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.searchbar-input::placeholder {
+  color: #94a3b8;
+}
+
+.searchbar-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Dropdown Suggestions */
+.suggestions-dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  right: 0;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+  animation: dropdownSlideIn 0.2s ease;
+}
+
+@keyframes dropdownSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom Scrollbar */
+.suggestions-dropdown::-webkit-scrollbar {
+  width: 8px;
+}
+
+.suggestions-dropdown::-webkit-scrollbar-track {
+  background: #0f172a;
+  border-radius: 0 0.75rem 0.75rem 0;
+}
+
+.suggestions-dropdown::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 4px;
+}
+
+.suggestions-dropdown::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* Suggestion Item */
+.suggestion-item {
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border-bottom: 1px solid #334155;
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover,
+.suggestion-item.selected {
+  background: #334155;
+}
+
+.suggestion-item:active {
+  background: #475569;
+}
+
+/* Suggestion Content */
+.suggestion-main {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.no-results {
+  padding: 1.5rem;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 640px) {
+  .suggestions-dropdown {
+    max-height: 250px;
+  }
+
+  .suggestion-item {
+    padding: 0.875rem;
+  }
+
+  .city-name {
+    font-size: 0.9375rem;
+  }
+
 }

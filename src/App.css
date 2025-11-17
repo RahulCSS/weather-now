@@ -1,5 +1,6 @@
 .container {
   width: min(100%, 90rem);
+  height: 100dvh;
   margin: 0 auto;
   padding: 1rem 5rem;
   background-color: hsl(243, 96%, 9%);
@@ -24,6 +25,8 @@
 .hero-section h1 {
   font-family: 'BricolageGrotesque';
   font-weight: 700;
+  letter-spacing: 1px;
+  font-size: 2.5rem;
 }
 
 .searchbar-button {
@@ -38,4 +41,33 @@
   cursor: pointer;
   text-align: center;
   width: 8rem;
+}
+
+.weather-Data-section{
+  display: flex;
+  gap: 2rem;
+}
+
+.left-column-section{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 60%;
+}
+
+.right-column-section{
+  width: 40%;
+  background-color: hsl(243, 27%, 20%);
+  border-radius: 1rem;
+  padding: 2rem;
+}
+
+.hourly-forecast-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.right-column-section Selector{
+  background-color: hsl(243, 23%, 30%);
 }

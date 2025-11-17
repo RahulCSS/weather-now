@@ -1,0 +1,36 @@
+.dailyinfo-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 120px;
+  padding: 12px 10px;
+  border-radius: 12px;
+  background: hsl(243, 27%, 20%);
+}
+
+.dailyinfo-day {
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.dailyinfo-icon {
+  width: 2rem;
+  height: 2rem;
+  object-fit: contain;
+  margin: 10px 0;
+}
+
+.dailyinfo-temp-values {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.6rem;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.dailyinfo-temp-values p {
+  margin: 0;
+  font-size: 8px;
+}

@@ -1,0 +1,5 @@
+.daily-cards-container, .loading-daily-forecast{
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
