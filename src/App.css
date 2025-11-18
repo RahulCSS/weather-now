@@ -1,16 +1,15 @@
 .container {
-  width: min(100%, 90rem);
-  height: 100dvh;
+  width: min(1440px, 95%);
+  height: 100vh;
   margin: 0 auto;
   padding: 1rem 5rem;
-  background-color: hsl(243, 96%, 9%);
 }
 
 .header-section {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
+  padding: 1rem 0;
 }
 
 .hero-section {
@@ -31,8 +30,10 @@
 
 .searchbar-button {
   display: flex;
+  flex-direction: column;
   gap: 1rem;
 }
+
 
 #search-button {
   background-color: hsl(233, 67%, 56%);
@@ -49,8 +50,11 @@
 
 .weather-Data-section{
   display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
   gap: 2rem;
 }
+
 
 .left-column-section{
   display: flex;
@@ -71,4 +75,41 @@
 
 .right-column-section Selector{
   background-color: hsl(243, 23%, 30%);
+}
+
+@media (max-width: 375px) {
+  .container {
+    padding: 1rem 1.5rem;
+  }
+
+  .hero-section h1 {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .left-column-section, .right-column-section {
+    width: 100%;
+  }
+}
+
+
+@media (min-width: 720px) {
+  .searchbar-button {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+@media (min-width: 1080px) {
+  .weather-Data-section {
+    flex-direction: row;
+  }
+
+  .left-column-section {
+    width: 60%;
+  }
+
+  .right-column-section {
+    width: 40%;
+  }
 }

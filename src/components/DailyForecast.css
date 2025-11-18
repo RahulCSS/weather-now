@@ -1,6 +1,5 @@
 .daily-cards-container, .loading-daily-forecast{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 0.75rem;
 }

@@ -99,3 +99,10 @@
   font-weight: 200;    
   color: hsl(250, 6%, 84%);  
 }
+
+
+@media (max-width: 375px) {
+  .selector-dropdown {
+    max-width: 90vw;
+  }
+}

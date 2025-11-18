@@ -26,3 +26,9 @@
     color: hsl(0, 0%, 100%);
     font-family: 'DM Sans', sans-serif;
 }
+
+body{
+  background-color: hsl(243, 96%, 9%);
+  width: 100%;
+  height: 100vh;
+}

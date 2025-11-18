@@ -54,9 +54,9 @@ const App = () => {
   );
 
   // Handle city selection from dropdown
-  const handleCitySelect = async (city, unit) => {
+  const handleCitySelect = async (city) => {
     setSelectedCity(city);
-    const isMetric = unit === "Metric";
+    const isMetric = unit=== "Metric";
 
     // Fetch weather data for selected city
     try {
@@ -67,7 +67,9 @@ const App = () => {
           city.longitude
         }&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,windspeed_10m&hourly=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min&temperature_unit=${
           isMetric ? "celsius" : "fahrenheit"
-        }&wind_speed_unit=${isMetric ? "kmh" : "mph"}&precipitation_unit=${
+        }&wind_speed_unit=${
+          isMetric ? "kmh" : "mph"
+        }&precipitation_unit=${
           isMetric ? "mm" : "inch"
         }&timezone=auto`
       );
@@ -92,8 +94,14 @@ const App = () => {
   const handleUnitChange = (selectedUnit) => {
     if( !weatherData) return;
     setUnit(selectedUnit);
-    handleCitySelect(selectedCity, selectedUnit);
   };
+
+  useEffect(() => {
+  if (selectedCity) {
+    handleCitySelect(selectedCity);
+  }
+}, [unit]);
+
 
   return (
     <div className="container">
